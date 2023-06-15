@@ -9,6 +9,7 @@ import { TableFilterComponent } from '../table-filter/table-filter.component';
 import { TextComponent } from '../text/text.component';
 import { CoreModule } from '../core/core.module';
 import { CreateUpdateContactComponent } from '../table-filter/create-update-contact/create-update-contact.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,10 @@ import { CreateUpdateContactComponent } from '../table-filter/create-update-cont
   ],
   imports: [
     CommonModule,
-    MainRoutingModule,CoreModule
+    MainRoutingModule,CoreModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CoreModule
   ]
 })
 export class MainModule { }

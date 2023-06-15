@@ -5,6 +5,7 @@ import { AddInfoComponent } from '../add-info/add-info.component';
 import { HomeButtonComponent } from '../home-button/home-button.component';
 import { TableFilterComponent } from '../table-filter/table-filter.component';
 import { TextComponent } from '../text/text.component';
+import { CreateUpdateContactComponent } from '../table-filter/create-update-contact/create-update-contact.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'Text', component: TextComponent},
   {path: 'HomeButton', component: HomeButtonComponent},
   {path: 'TableFilter', component: TableFilterComponent},
+  {path: 'create-contact', component: CreateUpdateContactComponent},
   {path: 'AddInfo', component: AddInfoComponent}
 ];
 

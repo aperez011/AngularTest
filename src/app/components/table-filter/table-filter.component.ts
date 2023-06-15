@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TableStructure } from '../../model/TableStructure';
 import { MatTableDataSource } from '@angular/material/table';
 
+import { MatDialog } from '@angular/material/dialog';
+import { CreateUpdateContactComponent } from './create-update-contact/create-update-contact.component';
 
 const ELEMENT_DATA: TableStructure[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -23,12 +25,13 @@ const ELEMENT_DATA: TableStructure[] = [
 })
 export class TableFilterComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombre', 'apellido', 'telefono', 'email', 'direccion'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'telefono', 'email', 'direccion', 'acciones'];
 
   // dataSource = ELEMENT_DATA;
 
   contacts = [
     {
+      "id": 1,
       "nombre": "Juan",
       "apellido": "Pérez",
       "telefono": "123456789",
@@ -36,6 +39,7 @@ export class TableFilterComponent implements OnInit {
       "direccion": "Calle Principal 123"
     },
     {
+      "id": 2,
       "nombre": "María",
       "apellido": "González",
       "telefono": "987654321",
@@ -43,71 +47,69 @@ export class TableFilterComponent implements OnInit {
       "direccion": "Avenida Central 456"
     },
     {
+      "id": 3,
       "nombre": "Pedro",
       "apellido": "Sánchez",
       "telefono": "555555555",
       "email": "pedro@example.com",
       "direccion": "Plaza Mayor 789"
     },
-    {
-      "nombre": "Laura",
-      "apellido": "López",
-      "telefono": "999999999",
-      "email": "laura@example.com",
-      "direccion": "Calle Secundaria 321"
-    },
-    {
-      "nombre": "Carlos",
-      "apellido": "Martínez",
-      "telefono": "444444444",
-      "email": "carlos@example.com",
-      "direccion": "Paseo del Sol 567"
-    },
-    {
-      "nombre": "Ana",
-      "apellido": "Rodríguez",
-      "telefono": "777777777",
-      "email": "ana@example.com",
-      "direccion": "Avenida Norte 890"
-    },
-    {
-      "nombre": "Luis",
-      "apellido": "Hernández",
-      "telefono": "222222222",
-      "email": "luis@example.com",
-      "direccion": "Calle Sur 654"
-    },
-    {
-      "nombre": "Isabel",
-      "apellido": "Lara",
-      "telefono": "666666666",
-      "email": "isabel@example.com",
-      "direccion": "Ruta Este 987"
-    },
-    {
-      "nombre": "Miguel",
-      "apellido": "Díaz",
-      "telefono": "888888888",
-      "email": "miguel@example.com",
-      "direccion": "Avenida Oeste 234"
-    },
-    {
-      "nombre": "Elena",
-      "apellido": "Fernández",
-      "telefono": "111111111",
-      "email": "elena@example.com",
-      "direccion": "Carretera Central 567"
-    }
+
   ];
 
   dataSource: MatTableDataSource<any>;
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog
+  ) {
+
     this.dataSource = new MatTableDataSource(this.contacts);
+
   }
 
   ngOnInit(): void {
     // throw new Error('Method not implemented.');
+  }
+
+  setDatasource() {
+
+    this.dataSource = new MatTableDataSource(this.contacts);
+  }
+
+  eliminarContacto(contact: any) {
+
+    this.contacts = this.contacts.filter(x => x.id != contact.id);
+
+    this.setDatasource();
+  }
+
+  openModal(contacto: any = null) {
+    let ref = this.dialog.open(CreateUpdateContactComponent,
+      {
+        width: '50%',
+        data: contacto
+      });
+
+    ref.afterClosed().subscribe(data => {
+
+      if (data) {
+        if (data.id == 0) {
+
+          const idNuevo = this.contacts.reduce((maxId, contact) => {
+            return contact.id > maxId ? contact.id : maxId;
+          }, 0) + 1;
+
+          data.id = idNuevo;
+          this.contacts.push(data);
+          this.setDatasource();
+        } else {
+          let idx = this.contacts.findIndex(x => x.id == data.id);
+          this.contacts[idx] = data;
+
+          this.setDatasource();
+        }
+      }
+    })
   }
 
 }

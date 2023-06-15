@@ -1,1 +1,44 @@
-<p>create-update-contact works!</p>
+<form [formGroup]="contactForm" (submit)="guardar()">
+    <div>
+      <label>Nombre</label>
+      <input matInput formControlName="nombre" required>
+      <div style="color: red;" *ngIf="contactForm.get('nombre')?.invalid && contactForm.get('nombre')?.touched">
+        Nombre es requerido.
+      </div>
+    </div>
+    
+    <div>
+      <label>Apellido</label>
+      <input matInput formControlName="apellido" required>
+      <div style="color: red;" *ngIf="contactForm.get('apellido')?.invalid && contactForm.get('apellido')?.touched">
+        El apellido es requerido.
+      </div>
+    </div>
+    
+    <div>
+      <label>Teléfono</label>
+      <input matInput formControlName="telefono" required>
+      <div style="color: red;" *ngIf="contactForm.get('telefono')?.invalid && contactForm.get('telefono')?.touched">
+        telefono es requerido.
+      </div>
+    </div>
+    
+    <div>
+      <label>Email</label>
+      <input matInput type="email" formControlName="email" required>
+      <div style="color: red;" *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched">
+        Email es requerido.
+      </div>
+    </div>
+    
+    <div>
+      <label>Dirección</label>
+      <textarea matInput formControlName="direccion"></textarea>
+      <div style="color: red;" *ngIf="contactForm.get('direccion')?.invalid && contactForm.get('direccion')?.touched">
+        La direccion es requerida.
+      </div>
+    </div>
+    
+    <button [disabled]="contactForm.invalid" mat-raised-button color="primary" type="submit">Guardar</button>
+  </form>
+  

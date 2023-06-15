@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 export class HomeButtonComponent {
   @Output() tituloEvent = new EventEmitter<string>();
 
+  titulo: string = 'Mi título personalizado';
   constructor(private router: Router) {}
 
   redirectToHome() {
-    const titulo = 'Mi título personalizado'; // Puedes usar cualquier valor aquí
-    this.tituloEvent.emit(titulo);
-    this.router.navigate(['/main/main', titulo]);
+    this.tituloEvent.emit(this.titulo);
+    this.router.navigate(['/main/main', this.titulo]);
   }
 }
