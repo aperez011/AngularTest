@@ -12,11 +12,11 @@
         <p class="designation">Software Engineer</p>
         <mat-divider></mat-divider>
 
-        <button mat-button class="menu-button" routerLink="">
+        <button mat-button class="menu-button" routerLink="main/TableFilter">
             <mat-icon>home</mat-icon>
-            <span>Home</span>
+            <span>Crud</span>
         </button>
-        <button mat-button class="menu-button" routerLink="Text">
+        <button mat-button class="menu-button" routerLink="main/Text">
             <mat-icon>person</mat-icon>
             <span>Text</span>
         </button>
@@ -28,8 +28,8 @@
         </button>
     </mat-drawer>
     <mat-drawer-content>
-        <div class="mat-elevation-z8">
-            <app-table-filter></app-table-filter>
+        <div style="margin-left: 30px;" class="mat-elevation-z8">
+            <router-outlet></router-outlet>
         </div>
     </mat-drawer-content>
 </mat-drawer-container>

@@ -7,12 +7,17 @@ import { TableFilterComponent } from "./components/table-filter/table-filter.com
 import { HomeButtonComponent } from "./components/home-button/home-button.component";
 
 const routes: Routes = [
-    {path: '', component: LayoutComponent},
-    {path: 'Home', component: LayoutComponent},
-    {path: 'Text', component: TextComponent},
-    {path: 'HomeButton', component: HomeButtonComponent},
-    {path: 'TableFilter', component: TableFilterComponent},
-    {path: 'AddInfo', component: AddInfoComponent}
+    {path: '', component: TextComponent},
+    {
+        path: 'principal',
+        loadChildren: () => import('./components/layout/layout.module').then(m => m.LayoutModule)
+    },
+    {
+        path: 'main',
+        loadChildren: () => import('./components/main/main.module').then(m => m.MainModule)
+    },
+    // {path: 'Home', component: LayoutComponent},
+   
 ];
 
 @NgModule({
