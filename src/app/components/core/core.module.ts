@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -20,10 +21,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatIconModule,
     MatDividerModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
   ],
   exports: [
-     MatToolbarModule,
+    MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
     MatDividerModule,
@@ -31,6 +33,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatTableModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatCardModule,
   ]
 })
 export class CoreModule { }
